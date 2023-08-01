@@ -3,6 +3,7 @@
 ## Introduction
 
 we developed a deep graph contrastive clustering framework, named stDGCC, aiming to elucidate accurately the underlying spatial domains by explicitly integrating spatial information and gene expression profiles. stDGCC uses a spatially informed graph node embedding model to extract informative cellular information of the spatial information and gene expression profiles from ST data in an unsupervised manner. Then, by constructing positive and negative graphs, the encoder incorporates both graphs to obtain positive and negative embeddings for contrastive learning, allowing learning of shared semantic representations across different modalities. In addition, three training losses, namely the contrastive learning loss, reconstruction loss, and Kullback–Leibler (KL) divergence loss, are optimized simultaneously to achieve informative and discriminative feature learning while preserving the topological representation of the cell spot-spot relationships.
+![Image text](OV.jpg)
 
 ## Installation
 

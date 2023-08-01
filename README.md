@@ -19,11 +19,11 @@ or
 conda create --name stDGCC --file requirements
 ```
 
-## data
+## Data
 
 We provide all the intermediate data from our experiments, the raw data is too large and we only provide the download link.
 
-| dataset        |                             link                             |
+| Dataset        |                             Link                             |
 | -------------- | :----------------------------------------------------------: |
 | DLPFC          |            http://research.libd.org/spatialLIBD/             |
 | E13.5_E1S3     |       https://db.cngb.org/stomics/datasets/STDS0000058       |

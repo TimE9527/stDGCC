@@ -30,7 +30,7 @@ We provide all the intermediate data from our experiments, the raw data is too l
 
 ## Usage
 
-###### data_generation.py: This code file is used to preprocess the data, if you want to run this file you need to download the original dataset in advance.
+### data_generation.py: This code file is used to preprocess the data, if you want to run this file you need to download the original dataset in advance.
 
 DLPFC/151507
 
@@ -50,7 +50,7 @@ MH
 python data_generation.py --data_path dataset/ --data_name ME --generated_data_path generated_data/ --platform Stereo-seq --threshold 2
 ```
 
-###### run.py: This code file is used to train the model, and we have provided data and results from this code. If you need to import our trained model directly, you can use the --load 1
+### run.py: This code file is used to train the model, and we have provided data and results from this code. If you need to import our trained model directly, you can use the --load 1
 
 DLPFC/151507
 
@@ -70,4 +70,4 @@ MH
 python run.py --data_path generated_data/ --data_name MH --num_epoch 14000 --DGI_P 1.0 --MSE_P 0.02 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.2 --n_clusters 12 --learning_rate 1e-6  --platform Slide-seqV2 --model_path model/ --embedding_data_path embedding/ --result_path result/
 ```
 
-###### ARI&NMI.ipynb: This code file is used for results display.
+### ARI&NMI.ipynb: This code file is used for results display.

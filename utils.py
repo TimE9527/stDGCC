@@ -92,7 +92,7 @@ def stDGCC(args):
                 args.num_epoch) + '_Embed_X.npy'
             np.save(X_embedding_filename, X_embedding)
 
-    # 聚类
+    # cluster
     if args.cluster:
         cluster_type = 'kmeans'  # 'louvain' leiden kmeans
         print("-----------Clustering-------------")

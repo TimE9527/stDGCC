@@ -71,13 +71,13 @@ def stDGCC(args):
     if args.DGI and (lambda_I >= 0):
         print("-----------Deep Graph Infomax-------------")
         data_list = get_graph(adj, X_data)
-        if args.platform in ['10x','Stereo-seq']:
-            data_loader = DataLoader(data_list, batch_size=batch_size)
-        elif args.platform in ['Slide-seqV2']:
-            data_loader = DataLoader(data_list, batch_size=batch_size)
-            for d in data_loader:
-                print(d)
-
+        # if args.platform in ['10x','Stereo-seq']:
+        #     data_loader = DataLoader(data_list, batch_size=batch_size)
+        # elif args.platform in ['Slide-seqV2']:
+        #     data_loader = DataLoader(data_list, batch_size=batch_size)
+            # for d in data_loader:
+            #     print(d)
+        data_loader = DataLoader(data_list, batch_size=batch_size)
         model = stDGCC_train(args, data_loader=data_loader, in_channels=num_feature)
         model.eval()
 

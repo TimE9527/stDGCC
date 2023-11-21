@@ -70,10 +70,13 @@ if __name__ == "__main__":
     args.COS_P = args.DGI_P
 
     # file_name = 'all'+'/'+str(args.DGI_P)+'_'+str(args.MSE_P)+'_'+str(args.KL_P) + '/'
+    # args.model_path = args.model_path + args.data_name + '/' + file_name
     args.model_path = args.model_path + args.data_name + '/'
     args.result_path = args.result_path + args.data_name + '/'
     args.embedding_data_path = args.embedding_data_path + args.data_name + '/'
-    args.result_path = args.result_path + 'lambdaI' + str(args.lambda_I) + '/'
+
+    # args.result_path = args.result_path + file_name +'lambdaI' + str(args.lambda_I) + '/'
+    args.result_path = args.result_path +'lambdaI' + str(args.lambda_I) + '/'
     if not os.path.exists(args.embedding_data_path):
         os.makedirs(args.embedding_data_path)
     if not os.path.exists(args.model_path):

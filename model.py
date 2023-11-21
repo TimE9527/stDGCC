@@ -189,7 +189,7 @@ def stDGCC_train(args, data_loader, in_channels):
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
     if args.load:
-        filename = args.model_path + 'lambdaI_' + str(args.lambda_I) + '_epoch' + str(
+        filename = args.model_path + 'DGI_lambdaI_' + str(args.lambda_I) + '_epoch' + str(
             args.num_epoch) + '.pth.tar'
         model.load_state_dict(torch.load(filename))
     else:
@@ -229,6 +229,13 @@ def stDGCC_train(args, data_loader, in_channels):
                 # print(data.x)
                 print('Epoch: {:03d}, Loss: {:.4f}, CL_Loss: {:.4f}, MSE_Loss: {:.4f}, KL_Loss: {:.4f}'
                       .format(epoch + 1, np.mean(All_loss_v), np.mean(CL_loss_v), np.mean(MSE_loss_v), np.mean(KL_loss_v)))
+                
+            # if (epoch+1) in [50, 100, 250, 500, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 14500, 15000, 15500,16000, 17000, 18000, 19000,20000,21000,22000,23000,24000,25000]:
+            #     print(epoch)
+            #     DGI_filename = args.model_path + 'DGI_lambdaI_' + str(args.lambda_I) + '_epoch' + str(epoch+1) + '.pth.tar'
+            #     torch.save(model.state_dict(), DGI_filename)
+
+            
                 
 
         end_time = datetime.datetime.now()

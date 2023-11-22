@@ -15,7 +15,7 @@ conda env create -f env_name.yml
 
 ## Data
 
-We provide all the intermediate data from our experiments, the raw data is too large and we only provide the download link.
+You can download these raw datasets from the source of the raw datasets.
 
 |                  Dataset                  |                             Link                             |
 | :---------------------------------------: | :----------------------------------------------------------: |
@@ -24,6 +24,8 @@ We provide all the intermediate data from our experiments, the raw data is too l
 |              Puck_190921_21               | https://singlecell.broadinstitute.org/single_cell/study/SCP815/highly-sensitive-spatial-transcriptomics-at-near-cellular-resolution-with-slide-seqv2#study-summary |
 |             Puck\_180531\_23              | https://portals.broadinstitute.org/single_cell/study/slide-seq-study |
 | pnas.1912459116.sd12 pnas.1912459116.sd15 |     https://www.pnas.org/doi/abs/10.1073/pnas.1912459116     |
+
+We have also organized and made available the raw data and model files from the paper, which you can download at figshare: https://figshare.com/projects/Unraveling_Spatial_Domain_Characterization_in_Spatially_Resolved_Transcriptomics_with_Robust_Graph_Contrastive_Clustering/186525.
 
 ## Usage
 

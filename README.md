@@ -10,7 +10,7 @@ we developed a deep graph contrastive clustering framework, named stDGCC, aiming
 You can install the dependencies using the following command
 
 ```
-conda env create -f env_name.yml
+conda env create -f environment.yml
 ```
 
 ## Data
@@ -25,7 +25,7 @@ You can download these raw datasets from the source of the raw datasets.
 |             Puck\_180531\_23              | https://portals.broadinstitute.org/single_cell/study/slide-seq-study |
 | pnas.1912459116.sd12 pnas.1912459116.sd15 |     https://www.pnas.org/doi/abs/10.1073/pnas.1912459116     |
 
-We have also organized and made available the raw data and model files from the paper, which you can download at figshare: https://figshare.com/projects/Unraveling_Spatial_Domain_Characterization_in_Spatially_Resolved_Transcriptomics_with_Robust_Graph_Contrastive_Clustering/186525.
+We have also organized and made available the raw data and model files from the paper, which you can download at figshare: https://figshare.com/projects/stDGCC/186525.
 
 ## Usage
 

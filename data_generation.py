@@ -63,8 +63,8 @@ def adata_preprocess_3(adata, min_cells=50, pca_n_comps=2000, HVG=3000):
     sc.pp.highly_variable_genes(adata, flavor="seurat_v3", n_top_genes=HVG)
     sc.pp.normalize_total(adata, target_sum=1e4)
     # sc.pp.log1p(adata)
-    print(adata.X.shape)
-    adata.write('/home/zhangyingxi/stDGCC_AAAI/stDGCC/generated_data/merfish/merfish.h5ad')
+    # print(adata.X.shape)
+    # adata.write('/home/zhangyingxi/stDGCC_AAAI/stDGCC/generated_data/merfish/merfish.h5ad')
     # adata_X = sc.pp.pca(adata.X, n_comps=pca_n_comps)
     return adata[:, adata.var['highly_variable']].X
 def batch_correction(datasets, genes_list):

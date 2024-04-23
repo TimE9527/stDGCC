@@ -84,7 +84,7 @@ python run.py --data_path generated_data/ --data_name MH --num_epoch 900 --DGI_P
 MH1
 
 ```
-python run.py --data_path generated_data/ --data_name MH1 --num_epoch 12000 --DGI_P 1.0 --MSE_P 0.1 --KL_P 0.025 --HVG 3000 --threshold 50 --lambda_I 0.8 --n_clusters 7 --learning_rate 3e-5  --platform Slide-seqV1 --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name MH1 --num_epoch 900 --DGI_P 1.0 --MSE_P 0.1 --KL_P 0.025 --HVG 3000 --threshold 50 --lambda_I 0.8 --n_clusters 7 --learning_rate 3e-5  --platform Slide-seqV1 --model_path model/ --embedding_data_path embedding/ --result_path result/
 ```
 
 HO

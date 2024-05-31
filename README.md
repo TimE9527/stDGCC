@@ -78,7 +78,7 @@ python run.py --data_path generated_data/ --data_name MB --num_epoch 5000 --DGI_
 MH
 
 ```
-python run.py --data_path generated_data/ --data_name MH --num_epoch 900 --DGI_P 1.0 --MSE_P 0.02 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 11 --learning_rate 3e-5  --platform Slide-seqV2 --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name MH --num_epoch 900 --DGI_P 1.0 --MSE_P 0.02 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 3e-5  --platform Slide-seqV2 --model_path model/ --embedding_data_path embedding/ --result_path result/
 ```
 
 MH1

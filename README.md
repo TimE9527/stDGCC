@@ -72,7 +72,7 @@ python run.py --data_path generated_data/DLPFC/ --data_name 151507 --num_epoch 2
 MB
 
 ```
-python run.py --data_path generated_data/ --data_name MB --num_epoch 5000 --DGI_P 2.0 --MSE_P 0.1 --KL_P 0.005 --HVG 3000 --threshold 50 --lambda_I 0.8 --n_clusters 12 --learning_rate 1e-5  --platform 10x --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name MB --num_epoch 5000 --DGI_P 2.0 --MSE_P 0.1 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 1e-5  --platform 10x --model_path model/ --embedding_data_path embedding/ --result_path result/
 ```
 
 MH

@@ -40,7 +40,7 @@ python data_generation.py --data_path dataset/DLPFC/ --data_name 151507 --genera
 MB
 
 ```
-python data_generation.py --data_path dataset/ --data_name MB --generated_data_path generated_data/ --platform 10x --threshold 50
+python data_generation.py --data_path dataset/ --data_name MB --generated_data_path generated_data/ --platform 10x --threshold 100
 ```
 
 MH (mouse hippocampus  profiled by Slide-seqV2)

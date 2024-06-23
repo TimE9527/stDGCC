@@ -69,31 +69,31 @@ python data_generation.py --data_path dataset/ --data_name HO --generated_data_p
 DLPFC/151507
 
 ```
-python run.py --data_path generated_data/DLPFC/ --data_name 151507 --num_epoch 2500 --DGI_P 2.0 --MSE_P 0.05 --KL_P 0.005 --HVG 3000 --threshold 250 --lambda_I 0.8 --n_clusters 7 --learning_rate 1e-5  --platform 10x --model_path model/DLPFC/ --embedding_data_path embedding/DLPFC/ --result_path result/DLPFC/
+python run.py --data_path generated_data/DLPFC/ --data_name 151507 --DGI_P 2.0 --MSE_P 0.05 --KL_P 0.005 --HVG 3000 --threshold 250 --lambda_I 0.8 --n_clusters 7 --learning_rate 1e-5  --platform 10x --model_path model/DLPFC/ --embedding_data_path embedding/DLPFC/ --result_path result/DLPFC/ --num_epoch 2500
 ```
 
 MB
 
 ```
-python run.py --data_path generated_data/ --data_name MB --num_epoch 5000 --DGI_P 2.0 --MSE_P 0.1 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 1e-5  --platform 10x --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name MB --DGI_P 2.0 --MSE_P 0.1 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 1e-5  --platform 10x --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 5000
 ```
 
 MH
 
 ```
-python run.py --data_path generated_data/ --data_name MH --num_epoch 900 --DGI_P 1.0 --MSE_P 0.02 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 3e-5  --platform Slide-seqV2 --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name MH --DGI_P 1.0 --MSE_P 0.02 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 3e-5  --platform Slide-seqV2 --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 900
 ```
 
 MH1
 
 ```
-python run.py --data_path generated_data/ --data_name MH1 --num_epoch 900 --DGI_P 1.0 --MSE_P 0.1 --KL_P 0.025 --HVG 3000 --threshold 50 --lambda_I 0.8 --n_clusters 7 --learning_rate 3e-5  --platform Slide-seqV1 --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name MH1 --DGI_P 1.0 --MSE_P 0.1 --KL_P 0.025 --HVG 3000 --threshold 50 --lambda_I 0.8 --n_clusters 7 --learning_rate 3e-5  --platform Slide-seqV1 --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 900 
 ```
 
 HO
 
 ```
-python run.py --data_path generated_data/ --data_name HO --num_epoch 7000 --DGI_P 2.0 --MSE_P 0.2 --KL_P 0.005 --HVG 3000 --threshold 200 --lambda_I 0.8 --n_clusters 5 --learning_rate 1e-5  --platform MERFISH --model_path model/ --embedding_data_path embedding/ --result_path result/
+python run.py --data_path generated_data/ --data_name HO --DGI_P 2.0 --MSE_P 0.2 --KL_P 0.005 --HVG 3000 --threshold 200 --lambda_I 0.8 --n_clusters 5 --learning_rate 1e-5  --platform MERFISH --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 7000
 ```
 
 ### ARI&NMI.ipynb: This code file is used for results display.

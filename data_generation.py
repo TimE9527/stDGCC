@@ -35,8 +35,6 @@ def adata_preprocess_1(adata, min_cells=50, pca_n_comps=2000, HVG=3000):
     sc.pp.normalize_total(adata, target_sum=1e4)
     sc.pp.log1p(adata)
     sc.pp.scale(adata, zero_center=False, max_value=10)
-    # adata_X = sc.pp.pca(adata.X, n_comps=pca_n_comps)
-    # adata_X = sc.pp.pca(adata[:, adata.var['highly_variable']].X, n_comps=pca_n_comps)
     return adata[:, adata.var['highly_variable']].X
 
 def adata_preprocess_2(adata, min_cells=5, pca_n_comps=1500, HVG=3000):
@@ -51,6 +49,21 @@ def adata_preprocess_2(adata, min_cells=5, pca_n_comps=1500, HVG=3000):
     adata_X = sc.pp.pca(adata[:, adata.var['highly_variable']].X, n_comps=pca_n_comps)
 
     return adata_X
+
+
+def adata_preprocess_4(adata, min_cells=5):
+    print('===== 4 - Preprocessing Data ')
+    sc.pp.filter_genes(adata, min_cells=min_cells)
+    sc.pp.filter_cells(adata, min_counts=1)
+    print(adata)
+    # print(adata.X)
+    sc.pp.normalize_total(adata, target_sum=1e4)
+    sc.pp.log1p(adata)
+    sc.pp.scale(adata, zero_center=False, max_value=10)
+    # print(adata.X)
+    return adata.X
+
+
 def adata_preprocess_3(adata, min_cells=50, pca_n_comps=2000, HVG=3000):
     print('===== 3 - Preprocessing Data ')
     sc.pp.filter_genes(adata, min_cells=min_cells)
@@ -63,8 +76,8 @@ def adata_preprocess_3(adata, min_cells=50, pca_n_comps=2000, HVG=3000):
     sc.pp.highly_variable_genes(adata, flavor="seurat_v3", n_top_genes=HVG)
     sc.pp.normalize_total(adata, target_sum=1e4)
     # sc.pp.log1p(adata)
-    # print(adata.X.shape)
-    # adata.write('/home/zhangyingxi/stDGCC_AAAI/stDGCC/generated_data/merfish/merfish.h5ad')
+    print(adata.X.shape)
+
     # adata_X = sc.pp.pca(adata.X, n_comps=pca_n_comps)
     return adata[:, adata.var['highly_variable']].X
 def batch_correction(datasets, genes_list):
@@ -101,13 +114,24 @@ def adj_radius(dis, t, generated_data_fold):
 
     distances, indices = nbrs.radius_neighbors(coordinates, return_distance=True)
 
-    adj = np.zeros([distances.shape[0],distances.shape[0]])
-    for node_idx in range(indices.shape[0]):
-        adj[node_idx][indices[node_idx]] = 1
-    adj = adj - np.eye(distances.shape[0])
+    # adj = np.zeros([distances.shape[0],distances.shape[0]])
+    # for node_idx in range(indices.shape[0]):
+    #     adj[node_idx][indices[node_idx]] = 1
+    # adj = adj - np.eye(distances.shape[0])
+    # adj = sparse.csr_matrix(adj)
+
+    num_nodes = len(indices)
+    row_indices = []
+    col_indices = []
+    for i, neighbor_indices in enumerate(indices):
+        row_indices.extend([i] * len(neighbor_indices))
+        col_indices.extend(neighbor_indices)
+    data = np.ones(len(row_indices))
+    adj = sparse.csr_matrix((data, (row_indices, col_indices)), shape=(num_nodes, num_nodes))
+    adj.setdiag(0)
 
     with open(generated_data_fold +dis+'_'+str(t)+'_Adjacent', 'wb') as fp:
-        pickle.dump(sparse.csr_matrix(adj), fp)
+        pickle.dump(adj, fp)
 
 def adj_radius_batch(dis, t, batch, coordinates, generated_data_fold):
     from scipy import sparse
@@ -150,19 +174,56 @@ def get_Slide_seqV1_MH(count_file,pos_file):
     return adata_h5
 
 
-def get_MERFISH(count_file, pos_file):
-    df = pd.read_csv(count_file, index_col=0).T
-# coordinates字典，
-    coordinates = pd.read_excel(pos_file, index_col=0, sheet_name=[0,1,2])
-    merge = pd.concat(coordinates.values())
-    adata_h5 = ad.AnnData(df)
-    df = pd.DataFrame(index= merge.index, columns = ["batch"])
-    df.iloc[:coordinates[0].shape[0]] = "0"
-    df.iloc[coordinates[0].shape[0]:coordinates[0].shape[0]+coordinates[1].shape[0]] = "1"
-    df.iloc[-coordinates[2].shape[0]:] = "2"
-    adata_h5.obsm['spatial'] = merge
-    adata_h5.obs['batch'] = df
-    return adata_h5
+def get_MERFISH():
+    adata = sc.read_h5ad("dataset/MERFISH/MERFISH_Allen2022Molecular_aging_MsBrainAgingSpatialDonor_4_0_data.h5ad")
+    return adata
+
+def get_Xenium():
+    adata = sc.read("dataset/Xenium/matrix.mtx.gz")
+    adata = adata.T
+    location = pd.read_csv("dataset/Xenium/cells.csv.gz")
+    location = location[['x_centroid','y_centroid']]
+    adata.obsm['spatial'] = location.to_numpy()
+    adata = adata[(adata.obsm['spatial'][:,0]>2000) & (adata.obsm['spatial'][:,0]<8000) & (adata.obsm['spatial'][:,1]>3000)]
+    adata.var_names_make_unique()
+    return adata
+
+def get_CosMX():
+    # 38987
+    exprMat = pd.read_csv("dataset/CosMX/Quarter Brain/Run5642_S3_Quarter_exprMat_file.csv")
+    metadata = pd.read_csv("dataset/CosMX/Quarter Brain/Run5642_S3_Quarter_metadata_file.csv")
+    exprMat['spots'] = exprMat['fov'].astype(str) + '_'+exprMat['cell_ID'].astype(str)
+    metadata['spots'] = metadata['fov'].astype(str) + '_'+metadata['cell_ID'].astype(str)
+    exprMat.set_index('spots', inplace=True)
+    metadata.set_index('spots', inplace=True)
+
+    location = metadata[['CenterX_global_px', 'CenterY_global_px']]
+    row_names = location.index.tolist()
+
+    count = exprMat
+    count =count.iloc[:, 2:]
+    count =count.iloc[:, :-10]
+    count = count.loc[row_names]
+
+
+    import anndata as ad
+    adata = ad.AnnData(count)
+    adata.obsm['spatial'] = location.to_numpy()
+    return adata
+
+def get_MERFISH2():
+    import pandas as pd
+    countMat = pd.read_csv("dataset/MERFISH2/datasets_mouse_brain_map_BrainReceptorShowcase_Slice2_Replicate1_cell_by_gene_S2R1.csv", index_col=0)
+    metadata = pd.read_csv("dataset/MERFISH2/datasets_mouse_brain_map_BrainReceptorShowcase_Slice2_Replicate1_cell_metadata_S2R1.csv", index_col=0)
+    location = metadata.loc[countMat.index.tolist()][['center_x','center_y']]
+    import anndata as ad
+    adata = ad.AnnData(countMat)
+    adata.obsm['spatial'] = location.to_numpy()
+    adata = adata[:,0:483]
+
+    return adata
+
+
 def main(args):
     print(args)
     data_fold = args.data_path + args.data_name + '/'
@@ -181,9 +242,11 @@ def main(args):
         if args.data_name != 'MB':
             features = adata_preprocess_2(adata_h5, min_cells=args.min_cells, pca_n_comps=1500, HVG = args.HVG)
     elif args.platform=='Stereo-seq':
+        # 读取adata
         adata_h5 = sc.read_h5ad(data_fold+'E13.5_E1S3.MOSTA.h5ad')
         adata_h5.X = adata_h5.layers['count']
         adata_h5.var_names_make_unique()
+        # 预处理
         features = adata_preprocess_2(adata_h5, min_cells=args.min_cells, pca_n_comps=1500, HVG = args.HVG)
     elif args.platform=='Slide-seqV2':
         adata_h5 = get_Slide_seqV2_MH(count_file=data_fold+'Puck_190921_21.digital_expression.txt',
@@ -194,35 +257,35 @@ def main(args):
                                   pos_file=data_fold+'BeadLocationsForR.csv')
         features = adata_preprocess_1(adata_h5, pca_n_comps=2000, min_cells=args.min_cells, HVG = args.HVG)         
     elif args.platform=='MERFISH':
-        # python data_generation.py --data_path dataset/ --data_name merfish --generated_data_path generated_data/ --platform MERFISH --threshold 200
-        adata_h5 = get_MERFISH(count_file=data_fold+'pnas.1912459116.sd12.csv', pos_file=data_fold+'pnas.1912459116.sd15.xlsx')
-        features = adata_preprocess_3(adata_h5, pca_n_comps=1500, min_cells=args.min_cells, HVG = args.HVG)
-        np.save(generated_data_fold +str(args.HVG)+'_HVG_features.npy', features)
-        adjs = []
-        for i in range(0,3):
-            coordinates = adata_h5[adata_h5.obs.batch==str(i)].obsm['spatial']
-            adj = adj_radius_batch(dis='euclidean', t=args.threshold, batch = i, coordinates = coordinates, generated_data_fold=generated_data_fold)
-            adjs.append(adj)
-        import scipy
-        all_adj = scipy.linalg.block_diag(adjs[0], adjs[1], adjs[2])
-        import pickle
-        from scipy import sparse
-        with open(generated_data_fold +'euclidean'+'_'+str(args.threshold)+'_Adjacent', 'wb') as fp:
-            pickle.dump(sparse.csr_matrix(all_adj), fp)
-        return 0
-    
+        adata_h5 = get_MERFISH()
+        features = adata_h5.X.toarray()
+    elif args.platform=='MERFISH2':
+        adata_h5 = get_MERFISH2()
+        features = adata_preprocess_1(adata_h5, pca_n_comps=2000, min_cells=args.min_cells, HVG = args.HVG) 
 
+
+    elif args.platform=='CosMX':
+        adata_h5 = get_CosMX()
+        features = adata_preprocess_4(adata_h5, min_cells=args.min_cells)
+    elif args.platform=='Xenium':
+        adata_h5 = get_Xenium()
+        # features = adata_preprocess_1(adata_h5, pca_n_comps=2000, min_cells=args.min_cells, HVG = args.HVG).toarray() 
+        features = adata_preprocess_1(adata_h5, pca_n_comps=2000, min_cells=args.min_cells, HVG = args.HVG).toarray()  
+        print(features.shape)
+
+    
+    # 存储坐标，计算graph
     coordinates = adata_h5.obsm['spatial']
     np.save(generated_data_fold + 'coordinates.npy', np.array(coordinates))
     adj_radius(dis='euclidean',t=args.threshold,generated_data_fold=generated_data_fold)
-    print(features)
+    print(features.shape)
     np.save(generated_data_fold +str(args.HVG)+'_HVG_features.npy', features)
 
 
 if __name__ == "__main__":
     import argparse
-
-
+    # CUDA_VISIBLE_DEVICES=2 python run.py --data_path generated_data/ --data_name Xenium --num_epoch 3000 --DGI_P 1.0 --MSE_P 0.05 --KL_P 0.005 --HVG 3000 --threshold 35 --lambda_I 0.2 --n_clusters 13 --learning_rate 1e-5  --platform MERFISH --model_path model/ --embedding_data_path embedding/ --result_path result/
+    # python data_generation.py --data_path dataset/ --data_name Xenium --generated_data_path generated_data/ --platform Xenium --threshold 35
     parser = argparse.ArgumentParser()
     parser.add_argument('--min_cells', type=float, default=5,
                         help='Lowly expressed genes which appear in fewer than this number of cells will be filtered out')

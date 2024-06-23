@@ -17,13 +17,16 @@ conda env create -f environment.yml
 
 You can download these raw datasets from the source of the raw datasets.
 
-|                  Dataset                  |                             Link                             |
-| :---------------------------------------: | :----------------------------------------------------------: |
-|                   DLPFC                   |            http://research.libd.org/spatialLIBD/             |
-|       Mouse Brain Section (Coronal)       | https://support.10xgenomics.com/spatial-gene-expression/datasets |
-|              Puck_190921_21               | https://singlecell.broadinstitute.org/single_cell/study/SCP815/highly-sensitive-spatial-transcriptomics-at-near-cellular-resolution-with-slide-seqv2#study-summary |
-|             Puck\_180531\_23              | https://portals.broadinstitute.org/single_cell/study/slide-seq-study |
-| pnas.1912459116.sd12 pnas.1912459116.sd15 |     https://www.pnas.org/doi/abs/10.1073/pnas.1912459116     |
+|            Dataset            |                   Name                    |                             Link                             |
+| :---------------------------: | :---------------------------------------: | :----------------------------------------------------------: |
+|             DLPFC             |                   DLPFC                   |            http://research.libd.org/spatialLIBD/             |
+|        10x mouse brain        |       Mouse Brain Section (Coronal)       | https://support.10xgenomics.com/spatial-gene-expression/datasets |
+| Slide-seqV2 mouse hippocampus |              Puck_190921_21               | https://singlecell.broadinstitute.org/single_cell/study/SCP815/highly-sensitive-spatial-transcriptomics-at-near-cellular-resolution-with-slide-seqv2#study-summary |
+|  Slide-seq mouse hippocampus  |             Puck\_180531\_23              | https://portals.broadinstitute.org/single_cell/study/slide-seq-study |
+|  MERFISH human osteosarcoma   | pnas.1912459116.sd12 pnas.1912459116.sd15 |     https://www.pnas.org/doi/abs/10.1073/pnas.1912459116     |
+|      Xenium mouse brain       |  Xenium_V1_FF_Mouse Brain_MultiSection_1  | https://www.10xgenomics.com/datasets/fresh-frozen-mouse-brain-replicates-1-standard |
+|       CosMx mouse brain       |            Run5642_S3_Quarter             |                   https://nanostring.com/                    |
+|  Vizgen MERFISH mouse brain   |  BrainReceptorShowcase Slice2_Replicate1  |           https://vizgen.com/data-release-program/           |
 
 We have also organized and made available the raw data and model files from the paper, which you can download at figshare: https://figshare.com/projects/stDGCC/186525.
 

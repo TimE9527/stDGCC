@@ -40,25 +40,25 @@ DLPFC/151507
 python data_generation.py --data_path dataset/DLPFC/ --data_name 151507 --generated_data_path generated_data/DLPFC/ --platform 10x --threshold 250
 ```
 
-MB
+MB (10x mouse brain dataset)
 
 ```
 python data_generation.py --data_path dataset/ --data_name MB --generated_data_path generated_data/ --platform 10x --threshold 100
 ```
 
-MH (mouse hippocampus  profiled by Slide-seqV2)
+MH (Slide-seqV2 mouse hippocampus dataset)
 
 ```
 python data_generation.py --data_path dataset/ --data_name MH --generated_data_path generated_data/ --platform Slide-seqV2 --threshold 100 --min_cells 50
 ```
 
-MH1 (mouse hippocampus  profiled by Slide-seq)
+MH1 (Slide-seq mouse hippocampus dataset)
 
 ```
 python data_generation.py --data_path dataset/ --data_name MH1 --generated_data_path generated_data/ --platform Slide-seqV1 --threshold 50 --min_cells 25
 ```
 
-HO
+HO (Human osteosarcoma dataset)
 
 ```
 python data_generation.py --data_path dataset/ --data_name HO --generated_data_path generated_data/ --platform MERFISH --threshold 200 --HVG 3000 --min_cells 500
@@ -72,25 +72,25 @@ DLPFC/151507
 python run.py --data_path generated_data/DLPFC/ --data_name 151507 --DGI_P 2.0 --MSE_P 0.05 --KL_P 0.005 --HVG 3000 --threshold 250 --lambda_I 0.8 --n_clusters 7 --learning_rate 1e-5  --platform 10x --model_path model/DLPFC/ --embedding_data_path embedding/DLPFC/ --result_path result/DLPFC/ --num_epoch 2500
 ```
 
-MB
+MB (10x mouse brain dataset)
 
 ```
 python run.py --data_path generated_data/ --data_name MB --DGI_P 2.0 --MSE_P 0.1 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 1e-5  --platform 10x --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 5000
 ```
 
-MH
+MH (Slide-seqV2 mouse hippocampus dataset)
 
 ```
 python run.py --data_path generated_data/ --data_name MH --DGI_P 1.0 --MSE_P 0.02 --KL_P 0.005 --HVG 3000 --threshold 100 --lambda_I 0.8 --n_clusters 12 --learning_rate 3e-5  --platform Slide-seqV2 --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 900
 ```
 
-MH1
+MH1 (Slide-seq mouse hippocampus dataset)
 
 ```
 python run.py --data_path generated_data/ --data_name MH1 --DGI_P 1.0 --MSE_P 0.1 --KL_P 0.025 --HVG 3000 --threshold 50 --lambda_I 0.8 --n_clusters 7 --learning_rate 3e-5  --platform Slide-seqV1 --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 900 
 ```
 
-HO
+HO (Human osteosarcoma dataset)
 
 ```
 python run.py --data_path generated_data/ --data_name HO --DGI_P 2.0 --MSE_P 0.2 --KL_P 0.005 --HVG 3000 --threshold 200 --lambda_I 0.8 --n_clusters 5 --learning_rate 1e-5  --platform MERFISH --model_path model/ --embedding_data_path embedding/ --result_path result/ --num_epoch 7000
